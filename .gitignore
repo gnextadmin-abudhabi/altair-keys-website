@@ -1,0 +1,19 @@
+# Al Tair Althahbi Key Cutting — Website
+# Static HTML site deployed to Cloudflare Pages
+
+# Large source files
+Images/*.jpeg
+Images/
+*.pdf
+Document_*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dev scripts
+convert-images.py
+fix-image-names.py
+
+# Cache
+*.log
