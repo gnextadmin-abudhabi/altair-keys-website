@@ -1,7 +1,9 @@
 # Al Tair Althahbi Key Cutting — Website
 
-# Original JPEG source images (don't deploy the huge originals)
-Images/
+# Original JPEG source images — ignore the big source folder
+Images/*.jpeg
+Images/*.JPG
+Images/*.png
 
 # OS files
 .DS_Store
