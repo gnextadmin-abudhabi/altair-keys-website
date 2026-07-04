@@ -17,3 +17,13 @@ fix-image-names.py
 *.log
 *.pdf
 Document_*
+
+# Secrets — never commit
+.dev.vars
+.env
+.env.local
+
+# Build output / dependencies
+node_modules/
+dist/
+.astro/

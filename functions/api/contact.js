@@ -1,60 +1,89 @@
 /**
- * Cloudflare Pages Function — Contact Form Handler
- * POST /api/contact → sends email via Resend.com
- * 
- * Set in Cloudflare Dashboard → Workers & Pages → Settings → Variables:
- *   RESEND_API_KEY = re_xxxxxxxxxxxx
- *   CONTACT_TO_EMAIL = info@altairkeys.com
+ * Cloudflare Pages Function — Contact Form → Resend
+ * POST /api/contact
+ *
+ * Set in Cloudflare Dashboard → Workers & Pages → altair-keys → Settings → Variables:
+ *   RESEND_API_KEY  = re_xxxxxxxxxxxx   (from resend.com)
+ *   CONTACT_TO      = info@altairkeys.com
  */
 
 export async function onRequestPost({ request, env }) {
     try {
         const fd = await request.formData();
-        const name = fd.get('name') || 'N/A';
-        const phone = fd.get('phone') || 'N/A';
-        const email = fd.get('email') || 'N/A';
-        const svc = fd.get('service') || 'N/A';
-        const loc = fd.get('location') || 'N/A';
-        const msg = fd.get('message') || 'No message';
-        const urgent = fd.get('urgent') ? '🚨 URGENT — ' : '';
+
+        // Honeypot check — bots fill this hidden field
+        if (fd.get('_honey')) {
+            return Response.json({ ok: true }); // silent discard
+        }
+
+        const name    = (fd.get('name')     || '').trim().slice(0, 200);
+        const phone   = (fd.get('phone')    || '').trim().slice(0, 30);
+        const email   = (fd.get('email')    || '').trim().slice(0, 200);
+        const service = (fd.get('service')  || '').trim().slice(0, 100);
+        const location= (fd.get('location') || '').trim().slice(0, 100);
+        const message = (fd.get('message')  || '').trim().slice(0, 2000);
+
+        if (!name || !phone || !message) {
+            return Response.json({ ok: false, error: 'Required fields missing' }, { status: 400 });
+        }
+
+        const urgent  = service === 'emergency-locksmith' ? '🚨 URGENT — ' : '';
+        const to      = env.CONTACT_TO   || 'info@altairkeys.com';
+        const from    = env.CONTACT_FROM || 'onboarding@resend.dev';
 
         const html = `<!DOCTYPE html>
-<html><body style="font-family:Arial;max-width:600px;padding:20px;">
-<h2 style="color:#C8962E;">${urgent}New Enquiry — Al Tair Althahbi</h2>
-<table style="width:100%;border-collapse:collapse;">
-<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;width:100px;">Name</td><td style="padding:8px;">${name}</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Phone</td><td style="padding:8px;"><a href="tel:${phone}">${phone}</a></td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;">${email}</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Service</td><td style="padding:8px;">${svc}</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Location</td><td style="padding:8px;">${loc}</td></tr>
-</table>
-<h3>Message:</h3>
-<p style="background:#f8f8f8;padding:12px;border-radius:6px;">${msg}</p>
-<p style="color:#999;font-size:12px;">Sent from altairkeys.com</p>
+<html><body style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;padding:24px;">
+<div style="background:#1a1a2e;padding:20px 24px;border-radius:8px 8px 0 0;">
+  <h2 style="color:#c9a84c;margin:0;">${urgent}New Enquiry — Al Tair Althahbi Key Cutting</h2>
+</div>
+<div style="border:1px solid #e0e0e0;border-top:none;padding:24px;border-radius:0 0 8px 8px;">
+  <table style="width:100%;border-collapse:collapse;font-size:15px;">
+    <tr><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;color:#666;width:120px;">Name</td><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;font-weight:600;">${escHtml(name)}</td></tr>
+    <tr><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;color:#666;">Phone</td><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;"><a href="tel:${escHtml(phone)}" style="color:#c9a84c;">${escHtml(phone)}</a></td></tr>
+    <tr><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;color:#666;">Email</td><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;">${email ? `<a href="mailto:${escHtml(email)}" style="color:#c9a84c;">${escHtml(email)}</a>` : '—'}</td></tr>
+    <tr><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;color:#666;">Service</td><td style="padding:10px 8px;border-bottom:1px solid #f0f0f0;">${escHtml(service) || '—'}</td></tr>
+    <tr><td style="padding:10px 8px;color:#666;">Location</td><td style="padding:10px 8px;">${escHtml(location) || '—'}</td></tr>
+  </table>
+  <h3 style="margin:20px 0 8px;color:#1a1a2e;">Message:</h3>
+  <div style="background:#f8f6f0;padding:16px;border-radius:6px;border-left:4px solid #c9a84c;line-height:1.6;">${escHtml(message)}</div>
+  <p style="margin-top:24px;color:#999;font-size:12px;">Sent from altairkeys.com contact form</p>
+</div>
 </body></html>`;
 
-        const to = env.CONTACT_TO_EMAIL || 'info@altairkeys.com';
-        
-        const r = await fetch('https://api.resend.com/emails', {
+        const res = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${env.RESEND_API_KEY}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                from: 'Al Tair Website <onboarding@resend.dev>',
-                to,
-                subject: `${urgent}Enquiry from ${name} — Al Tair Althahbi`,
+                from: `Al Tair Website <${from}>`,
+                to: [to],
+                subject: `${urgent}Enquiry from ${name} — Al Tair`,
                 html,
-                reply_to: email !== 'N/A' ? email : undefined,
+                reply_to: email || undefined,
             }),
         });
 
-        if (!r.ok) throw new Error(await r.text());
+        if (!res.ok) {
+            const err = await res.text();
+            console.error('Resend error:', err);
+            return Response.json({ ok: false, error: 'Email send failed' }, { status: 500 });
+        }
 
-        return Response.redirect('/contact.html?sent=ok', 302);
+        return Response.json({ ok: true });
+
     } catch (e) {
-        console.error(e);
-        return Response.redirect('/contact.html?sent=err', 302);
+        console.error('Contact handler error:', e);
+        return Response.json({ ok: false, error: 'Server error' }, { status: 500 });
     }
+}
+
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }

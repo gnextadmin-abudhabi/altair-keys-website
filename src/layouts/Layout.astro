@@ -1,0 +1,181 @@
+---
+const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname;
+const fullUrl = new URL(currentPath, 'https://altairkeys.com').href;
+const pageTitle = title + ' — Al Tair Althahbi Key Cutting';
+---
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{pageTitle}</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href={fullUrl}>
+  <link rel="alternate" hreflang="en" href={fullUrl}>
+  <link rel="alternate" hreflang="ar" href={fullUrl}>
+  <link rel="alternate" hreflang="x-default" href={fullUrl}>
+  <meta property="og:title" content={pageTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={fullUrl}>
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://altairkeys.com/images/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content={pageTitle}>
+  <meta name="twitter:description" content={description}>
+  <meta name="geo.region" content="AE-AZ">
+  <meta name="geo.placename" content="Madinat Zayed">
+  <meta name="geo.position" content="23.6525;53.7000">
+  <meta name="ICBM" content="23.6525, 53.7000">
+  {currentPath === '/' && <link rel="preload" as="image" href="/images/hero-workshop.webp" fetchpriority="high">}
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta property="og:locale" content="en_AE">
+  <meta property="og:site_name" content="Al Tair Althahbi Key Cutting">
+  <link rel="stylesheet" href="/css/style.css?v=rb1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://altairkeys.com/#business",
+    "name": "Al Tair Althahbi Key Cutting L.L.C - S.P.C",
+    "alternateName": ["الطير الذهبي لنسخ المفاتيح", "Al Tair Key Cutting"],
+    "url": "https://altairkeys.com/",
+    "telephone": "+971547542722",
+    "email": "info@altairkeys.com",
+    "priceRange": "AED",
+    "image": "https://altairkeys.com/images/logo.png",
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "24:00"
+    }],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Al Marami 2 St, MZE16",
+      "addressLocality": "Madinat Zayed",
+      "addressRegion": "Abu Dhabi",
+      "addressCountry": "AE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 23.6525,
+      "longitude": 53.7000
+    },
+    "hasMap": "https://maps.app.goo.gl/X1rvZrmEcpGMZRxK8",
+    "areaServed": [
+      {"@type": "City", "name": "Madinat Zayed"},
+      {"@type": "City", "name": "Ghayathi"},
+      {"@type": "City", "name": "Ruwais"},
+      {"@type": "City", "name": "Liwa Oasis"},
+      {"@type": "City", "name": "Mirfa"},
+      {"@type": "City", "name": "Sila"},
+      {"@type": "City", "name": "Habshan"}
+    ],
+    "knowsAbout": [
+      "Key Duplication","Key Cutting","Locksmith Services","Emergency Locksmith",
+      "Car Key Programming","Car Key Replacement","Safe Opening","Lock Installation",
+      "Garage Door Remote","Access Control Systems"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "47"
+    }
+  })} />
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="header__topbar">
+      <div class="container header__topbar-inner">
+        <span class="header__emergency">🔑 24/7 Emergency — <a href="tel:+971547542722">+971 54 754 2722</a></span>
+        <span class="header__hours">🕐 Open Daily 8 AM – 12 Midnight</span>
+        <a href="https://wa.me/971547542722" class="header__wa" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+        <button class="lang-toggle" data-lang-toggle aria-label="Switch language">عربي</button>
+      </div>
+    </div>
+    <div class="header__navbar">
+      <div class="container header__inner">
+        <a href="/" class="header__logo">
+          <img src="/images/logo.png" alt="Al Tair Althahbi Key Cutting" width="64" height="64" loading="eager" class="header__logo-img">
+          <div class="header__brand">
+            <span class="header__brand-en">AL TAIR ALTHAHBI KEY CUTTING</span>
+            <span class="header__brand-ar">الطير الذهبي لنسخ المفاتيح</span>
+          </div>
+        </a>
+        <nav class="nav" id="mainNav" aria-label="Main navigation">
+          <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <ul class="nav__list" id="navList" role="list">
+            <li><a href="/" class:list={["nav__link", { active: currentPath === "/" || currentPath === "/index/" }]} data-i18n="nav-home">Home</a></li>
+            <li><a href="/services/" class:list={["nav__link", { active: currentPath.startsWith("/services") }]} data-i18n="nav-services">Services</a></li>
+            <li><a href="/about/" class:list={["nav__link", { active: currentPath.startsWith("/about") }]} data-i18n="nav-about">About</a></li>
+            <li><a href="/contact/" class:list={["nav__link", { active: currentPath.startsWith("/contact") }]} data-i18n="nav-contact">Contact</a></li>
+            <li class="nav__cta-item"><a href="tel:+971547542722" class="btn btn--gold" data-i18n="nav-cta">📞 Call Now</a></li>
+            <li class="nav__lang"><button class="lang-toggle" data-lang-toggle aria-label="Switch language">عربي</button></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="/images/logo-footer.png" alt="Al Tair Althahbi Key Cutting" width="100" height="100" loading="lazy" class="footer__logo">
+          <h3 class="footer__name" data-i18n="footer-brand-name">AL TAIR ALTHAHBI KEY CUTTING L.L.C - S.P.C</h3>
+          <p class="footer__name-ar">الطير الذهبي لنسخ المفاتيح</p>
+          <p data-i18n="footer-brand-desc">Your trusted key duplication &amp; locksmith partner in Madinat Zayed, Western Region, Abu Dhabi.</p>
+        </div>
+        <div class="footer__links">
+          <h4 data-i18n="footer-quick">Quick Links</h4>
+          <ul>
+            <li><a href="/" data-i18n="nav-home">Home</a></li>
+            <li><a href="/services/" data-i18n="nav-services">Services</a></li>
+            <li><a href="/about/" data-i18n="nav-about">About</a></li>
+            <li><a href="/contact/" data-i18n="nav-contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__services">
+          <h4 data-i18n="footer-services">Services</h4>
+          <ul>
+            <li><a href="/services/#key-duplication" data-i18n="srv1-title">Key Duplication</a></li>
+            <li><a href="/services/#emergency-locksmith" data-i18n="srv3-title">Emergency Locksmith</a></li>
+            <li><a href="/services/#car-key-programming" data-i18n="srv4-title">Car Key Programming</a></li>
+            <li><a href="/services/#car-key-replacement" data-i18n="srv5-title">Car Key Replacement</a></li>
+            <li><a href="/services/#safe-opening" data-i18n="srv6-title">Safe Opening</a></li>
+            <li><a href="/services/#lock-installation" data-i18n="srv7-title">Lock Installation</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h4 data-i18n="footer-contact">Contact</h4>
+          <address>
+            <p>📍 Al Marami 2 St, MZE16<br>Madinat Zayed, Abu Dhabi, UAE</p>
+            <p>📞 <a href="tel:+971547542722">+971 54 754 2722</a></p>
+            <p>📧 <a href="mailto:info@altairkeys.com">info@altairkeys.com</a></p>
+            <p>🕐 Daily 8 AM – 12 Midnight</p>
+            <p><a href="https://maps.app.goo.gl/X1rvZrmEcpGMZRxK8" target="_blank" rel="noopener noreferrer">📍 Google Maps →</a></p>
+          </address>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p data-i18n="footer-bottom">© 2026 Al Tair Althahbi Key Cutting L.L.C - S.P.C. All rights reserved. | Trade License CN-5690039 | Abu Dhabi, UAE</p>
+        <p><a href="https://gxlocate.com" target="_blank" rel="noopener" class="footer__credit">Powered by gxlocate.com</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="/js/lang.js"></script>
+  <script defer src="/js/dynamic.js"></script>
+  <script defer src="/js/main.js"></script>
+</body>
+</html>

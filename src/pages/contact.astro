@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = 'Contact Al Tair Althahbi Key Cutting — Madinat Zayed';
+const description = 'Contact Al Tair Althahbi Key Cutting. Call +971 54 754 2722, WhatsApp, email info@altairkeys.com, or visit Al Marami 2 St, MZE16, Madinat Zayed. Open daily 8 AM – 12 Midnight.';
+---
+
+<Layout {title} {description}>
+
+    <section class="page-header">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Home</a> <span>/</span> <span data-i18n="nav-contact">Contact</span>
+            </nav>
+            <h1 class="page-header__title"><span class="text-gold">Contact</span> Us</h1>
+            <p class="page-header__subtitle">Get in touch — we're here to help with all your key and lock needs</p>
+        </div>
+    </section>
+
+    <main class="contact-page">
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact__grid">
+                    <div class="contact__info">
+                        <h2>Reach <span class="text-gold">Us</span></h2>
+                        <p>Available every day from 8:00 AM to 12:00 Midnight. Call, WhatsApp, email, or visit our shop.</p>
+                        <div class="contact__cards">
+                            <div class="contact__card">
+                                <span class="contact__icon">📞</span>
+                                <div><h3>Call Us</h3><a href="tel:+971547542722" class="contact__value">+971 54 754 2722</a><span class="contact__card-sub">Available 24/7 for emergencies</span></div>
+                            </div>
+                            <div class="contact__card">
+                                <span class="contact__icon">💬</span>
+                                <div><h3>WhatsApp</h3><a href="https://wa.me/971547542722" class="contact__value" target="_blank" rel="noopener noreferrer">+971 54 754 2722</a><span class="contact__card-sub">Message us any time</span></div>
+                            </div>
+                            <div class="contact__card">
+                                <span class="contact__icon">📧</span>
+                                <div><h3>Email</h3><a href="mailto:info@altairkeys.com" class="contact__value">info@altairkeys.com</a></div>
+                            </div>
+                            <div class="contact__card">
+                                <span class="contact__icon">📍</span>
+                                <div>
+                                    <h3>Visit Us</h3>
+                                    <p class="contact__value">Al Marami 2 Street, MZE16<br>Madinat Zayed, Abu Dhabi</p>
+                                    <a href="https://maps.app.goo.gl/X1rvZrmEcpGMZRxK8" class="contact__card-sub" target="_blank" rel="noopener noreferrer">Open in Google Maps →</a>
+                                </div>
+                            </div>
+                            <div class="contact__card">
+                                <span class="contact__icon">🕐</span>
+                                <div>
+                                    <h3>Working Hours</h3>
+                                    <p class="contact__value"><strong>Monday – Sunday</strong><br>8:00 AM – 12:00 Midnight</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact__emergency">
+                            <h3>🚨 Locked Out Right Now?</h3>
+                            <p>Call immediately — 24/7 emergency locksmith across the Western Region.</p>
+                            <a href="tel:+971547542722" class="btn btn--gold btn--lg">📞 Call +971 54 754 2722</a>
+                        </div>
+                    </div>
+
+                    <div class="contact__form-wrap">
+                        <h2>Send a <span class="text-gold">Message</span></h2>
+                        <p>We'll get back to you as soon as possible. For urgent help, please call.</p>
+                        <form class="contact__form" id="contactForm" action="/api/contact" method="POST">
+                            <!-- Honeypot spam trap -->
+                            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+                            <div class="form__group">
+                                <label for="name">Your Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Full name" autocomplete="name">
+                            </div>
+                            <div class="form__group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+971 5X XXX XXXX" autocomplete="tel">
+                            </div>
+                            <div class="form__group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email">
+                            </div>
+                            <div class="form__group">
+                                <label for="service">Service Needed</label>
+                                <select id="service" name="service">
+                                    <option value="">Select a service…</option>
+                                    <option value="key-duplication">Key Duplication</option>
+                                    <option value="emergency-locksmith">Emergency Locksmith</option>
+                                    <option value="car-key-programming">Car Key Programming</option>
+                                    <option value="car-key-replacement">Car Key Replacement</option>
+                                    <option value="safe-opening">Safe Opening</option>
+                                    <option value="lock-installation">Lock Installation</option>
+                                    <option value="garage-remote">Garage Door Remote</option>
+                                    <option value="access-control">Access Control</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form__group">
+                                <label for="location">Your Location</label>
+                                <select id="location" name="location">
+                                    <option value="">Select your area…</option>
+                                    <option value="madinat-zayed">Madinat Zayed</option>
+                                    <option value="ghayathi">Ghayathi</option>
+                                    <option value="ruwais">Ruwais</option>
+                                    <option value="liwa">Liwa Oasis</option>
+                                    <option value="mirfa">Mirfa</option>
+                                    <option value="sila">Sila</option>
+                                    <option value="habshan">Habshan</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form__group">
+                                <label for="message">Your Message *</label>
+                                <textarea id="message" name="message" rows="4" required placeholder="Describe what you need…"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--gold btn--lg btn--full">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-map">
+            <div class="contact-map__embed">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623!2d53.7!3d23.6525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDM5JzA5LjAiTiA1M8KwNDInMDAuMCJF!5e0!3m2!1sen!2sae"
+                    width="100%"
+                    height="400"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Al Tair Althahbi Location — Al Marami 2 Street, Madinat Zayed">
+                </iframe>
+            </div>
+            <div class="container">
+                <div class="contact-map__actions">
+                    <a href="https://maps.app.goo.gl/X1rvZrmEcpGMZRxK8" class="btn btn--gold" target="_blank" rel="noopener noreferrer">📍 Open in Google Maps</a>
+                    <a href="https://waze.com/ul?q=Al+Marami+2+St,+Madinat+Zayed,+Abu+Dhabi" class="btn btn--outline" target="_blank" rel="noopener noreferrer">🚗 Navigate with Waze</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</Layout>

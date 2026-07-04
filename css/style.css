@@ -546,14 +546,59 @@ img {
 /* --- Header --- */
 .header {
     position: fixed;
-    top: var(--topbar-height);
+    top: 0;
     left: 0;
     right: 0;
     background: var(--white);
     z-index: 1000;
-    height: var(--header-height);
     box-shadow: var(--shadow-sm);
     transition: box-shadow var(--transition);
+}
+
+.header__top-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-light);
+    font-size: 0.82rem;
+    flex-wrap: wrap;
+}
+
+.header__emergency {
+    color: var(--danger);
+    font-weight: 600;
+    animation: pulse 2s infinite;
+}
+
+.header__emergency a {
+    color: var(--danger);
+    text-decoration: underline;
+}
+
+.header__hours {
+    color: var(--text-light);
+    margin-left: auto;
+}
+
+.header__wa {
+    color: var(--text);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .header__top-row {
+        gap: 8px;
+        justify-content: center;
+        font-size: 0.75rem;
+        padding: 6px 0;
+    }
+    .header__hours {
+        margin-left: 0;
+    }
+    .header__wa {
+        display: none;
+    }
 }
 
 .header.scrolled {
@@ -627,6 +672,24 @@ img {
 
 .nav__cta {
     margin-left: 8px;
+}
+
+.nav__lang {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav__lang {
+        display: block;
+        text-align: center;
+        padding: 8px 0;
+    }
+    .nav__lang .lang-toggle {
+        margin: 0;
+    }
+    .top-bar .lang-toggle {
+        display: none;
+    }
 }
 
 .nav__toggle {
@@ -1456,24 +1519,43 @@ img {
 @media (max-width: 768px) {
     :root {
         --header-height: 80px;
-        --topbar-height: 40px;
+        --topbar-height: auto;
     }
     
     body {
-        padding-top: calc(var(--topbar-height) + var(--header-height));
+        padding-top: 0;
     }
     
     .top-bar {
-        font-size: 0.72rem;
+        position: relative;
+        height: auto;
+        padding: 8px 0;
+        font-size: 0.78rem;
     }
     
     .top-bar__content {
-        gap: 10px;
+        gap: 8px;
+        flex-wrap: wrap;
         justify-content: center;
+        line-height: 1.6;
+    }
+    
+    .top-bar__emergency {
+        width: 100%;
+        text-align: center;
     }
     
     .top-bar__hours {
-        display: none;
+        display: inline;
+    }
+    
+    .top-bar .lang-toggle {
+        margin-left: 8px;
+    }
+    
+    .header {
+        position: relative;
+        top: 0;
     }
     
     .header__logo-img {
