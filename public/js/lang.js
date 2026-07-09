@@ -103,7 +103,7 @@ const i18n = {
         "footer-quick": "Quick Links",
         "footer-services": "Our Services",
         "footer-contact": "Contact Us",
-        "footer-address": "Al Marami 2 St, MZE16<br>Madinat Zayed, Abu Dhabi, UAE",
+        "footer-address": "Shop 3, Al Marami 2 St, MZE16<br>Madinat Zayed, Abu Dhabi, UAE",
         "footer-bottom": "© 2026 Al Tair Althahbi Key Cutting L.L.C - S.P.C. All rights reserved. | Trade License CN-5690039 | Abu Dhabi, UAE",
 
         // Services Page
@@ -211,7 +211,7 @@ const i18n = {
         "footer-quick": "روابط سريعة",
         "footer-services": "خدماتنا",
         "footer-contact": "اتصل بنا",
-        "footer-address": "شارع المرامي 2، MZE16<br>مدينة زايد، أبوظبي، الإمارات",
+        "footer-address": "المحل 3، شارع المرامي 2، MZE16<br>مدينة زايد، أبوظبي، الإمارات",
         "footer-bottom": "© 2026 الطير الذهبي لنسخ المفاتيح ش.ذ.م - ش.ش.و. جميع الحقوق محفوظة. | رخصة تجارية CN-5690039 | أبوظبي، الإمارات",
 
         // Services Page
